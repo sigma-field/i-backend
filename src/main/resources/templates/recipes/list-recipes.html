@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head" />
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div th:replace="fragments :: menu"></div>
+        <h3>Recipes</h3>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="mb-3" th:href="@{/recipes/add}" role="button">Add
+                    Recipe</a>
+                <table class="table table-bordered table-striped mt-3 text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Recipe Id</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="recipe : ${recipes}">
+                            <td th:text="${recipe.id}" />
+                            <td th:text="${recipe.title}" />
+                            <td th:text="${recipe.category.name}"></td>
+
+                            <td> <img class="card-img-top" th:src="@{${recipe.imagePath}}" style="max-width: 100px;" />
+                            </td>
+                            <td>
+                                <a class="btn btn-sm" th:href="@{/recipes/update(recipeId=${recipe.id})}"
+                                    role="button"><em class="material-icons">edit</em></a>
+                                <a class="btn btn-sm" th:href="@{/recipes/delete(recipeId=${recipe.id})}" role="button"
+                                    onclick="if (!(confirm('are you sure to delete this recipe?'))) return false"><em
+                                        class="material-icons">delete_forever</em></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments :: head" />
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div th:replace="fragments :: menu"></div>
+        <h5>Categories</h5>
+        <hr>
+
+        <div class="row">
+            
+                <a class="ml-3 mb-3" th:href="@{/categories/add}" role="button">Add
+                    Category</a>
+                <input type="text" id="myFilter" class="form-control mt-3 mb-3" onkeyup="searchByName()"
+                    placeholder="Search Category by Name...">
+                
+                    <div class="card col-sm-12 col-lg-4 p-3" th:each="category:${categories}" id="categoryCard">
+
+                        <img class="card-img-top" th:src="@{${category.imagePath}}" />
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="${category.name}" />
+                            <p class=" card-text"><a class="btn btn-primary btn-sm"
+                                    th:href="@{/categories/update(categoryId=${category.id})}" role="button"><i
+                                        class="material-icons">edit</i></a>
+
+                                <a class="btn btn-danger btn-sm fa trash-alt"
+                                    th:href="@{/categories/delete(categoryId=${category.id})}" role="button"
+                                    onclick="if (!(confirm('are you sure to delete this category?'))) return false"><i
+                                        class="material-icons">delete</i></a>
+                            </p>
+                        </div>
+                    </div>
+                
+                
+            
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+    <script>
+        function search() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("categoryName");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("categoryTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function searchByName() {
+            var input, filter, cards, cardContainer, title, i;
+            input = document.getElementById("myFilter");
+            filter = input.value.toUpperCase();
+            cardContainer = document.getElementById("categoryCards");
+            cards = cardContainer.getElementsByClassName("card");
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".card-title");
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

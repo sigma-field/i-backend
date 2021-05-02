@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace=fragments::menu></div>
+
+        <h3>Manage About Us</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+
+                <form action="" th:action="@{/about-us/save}" th:object="${aboutUs}" method="post"
+                    enctype="multipart/form-data">
+
+
+                    <textarea type="text" rows="10" id="content" placeholder="Please Type-in About Us"
+                        class="form-control" th:field="*{content}" autocomplete="off"></textarea>
+
+                    <button type="submit" class="btn btn-info"><em class="material-icons">thumb_up_alt</em></button>
+
+                    <a th:href="@{/about-us/}" class="btn btn-warning "><em class="material-icons">backspace</em>
+                    </a>
+
+
+                </form>
+                <hr>
+                <a th:href="@{/recipes/list}">Back to Recipes List</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="fragments :: assets"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#content').summernote();
+
+        });
+    </script>
+
+
+</body>
+
+</html>
